@@ -1,0 +1,2 @@
+(this["webpackJsonpshop-clother"]=this["webpackJsonpshop-clother"]||[]).push([[8],{555:function(e,t,a){},680:function(e,t,a){"use strict";a.r(t);var r=a(21),n=a(0),o=a.n(n),c=(a(555),a(223)),s=a(153),i=c.e;i.Header=c.c,i.Footer=c.b,i.Content=c.a,i.Sider=s.b;var d=i;d.Header,d.Sider,d.Content,d.Footer;t.default=function(e){var t=Object(n.useState)(!1),a=Object(r.a)(t,2);return a[0],a[1],o.a.createElement("div",{className:"admin"},"day la Dashboard")}}}]);
+//# sourceMappingURL=8.3023e23e.chunk.js.map
