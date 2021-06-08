@@ -64,17 +64,7 @@ function MainPage(props) {
 
     }
 
-    useEffect(() => {
-        const fetchProductsList = async () => {
-            try {
-                const response = await productApi.getAll();
-                dispatch(AddToProduct(response.products));
-            } catch (err) {
-                console.log('failed to fetch product list :')
-            }
-        }
-        fetchProductsList();
-    }, []);
+
 
 
     const handleClickView = (product) => {
@@ -88,9 +78,9 @@ function MainPage(props) {
     }
 
     return (
-        <div>
+        <div style={{ background: "#fff" }}>
             <Carousels></Carousels>
-            <Container fixed className="main">
+            <Container fixed className="main" style={{ background: "#fff" }}>
                 <div className="main__hot">
                     <h1 className="main__title">THỜI TRANG HOT NHẤT</h1>
                     <p>----------------------<TurnedInNotIcon />----------------------</p>

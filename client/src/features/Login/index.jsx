@@ -29,8 +29,8 @@ function Login(props) {
     const onSubmit = async () => {
         try {
             const token = await userApi.login({ ...user })
-            const inforUser = await userApi.getUser()
-            dispatch(addToUser(inforUser));
+            // const inforUser = await userApi.getUser()
+            // dispatch(addToUser(inforUser));
             localStorage.setItem("token", JSON.stringify(token))
             localStorage.setItem('firstLogin', true)
             history.push('/admin')
