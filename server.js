@@ -22,7 +22,6 @@ app.use('/api', require('./routers/categoryRouter'))
 app.use('/api', require('./routers/upload'))
 app.use('/api', require('./routers/productRouter'))
 app.use('/api', require('./routers/oderRouter'))
-app.use('/api', require('./routers/testRouter'))
 
 
 

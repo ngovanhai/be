@@ -6,22 +6,18 @@ const { response } = require('express');
 const userCtrl = {
     register: async (req, res) => {
         try {
-            const { name, email, password } = req.body;
+            const {  email, password } = req.body;
             const user = await Users.findOne({ email })
             if (user) return res.status(400).json({ msg: "The email already exists." })
-            console.log("password",password);
             if (password.length < 6)
                 return res.status(400).json({ msg: "Password is at least 6 characters long." })
-
             // Password Encryption
             const passwordHash = await bcrypt.hash(password, 10)
             const newUser = new Users({
-                name, email, password: passwordHash
+                ...req.body, password: passwordHash
             })
-
             // Save mongodb
-           // await newUser.save()
-            
+           await newUser.save()
             // Then create jsonwebtoken to authentication
             const accesstoken = createAccessToken({ id: newUser._id })
             const refreshtoken = createRefreshToken({ id: newUser._id })
@@ -38,19 +34,16 @@ const userCtrl = {
     },
     login: async (req, res) => {
         try {
-            const { email, password } = req.body;
-            console.log(email)
+            const { email, password,isGoogle } = req.body;
             const user = await Users.findOne({ email })
-           
             if (!user) return res.status(400).json({ msg: "User does not exist." })
-
-            const isMatch = await bcrypt.compare(password, user.password)
-            if (!isMatch) return res.status(400).json({ msg: "Incorrect password." })
-
+            if(!isGoogle){
+                const isMatch = await bcrypt.compare(password, user.password)
+                if (!isMatch) return res.status(400).json({ msg: "Incorrect password." })
+            }
             // If login success , create access token and refresh token
             const accesstoken = createAccessToken({ id: user._id })
             const refreshtoken = createRefreshToken({ id: user._id })
-
             res.cookie('refreshtoken', refreshtoken, {
                 httpOnly: false,
                 path: '/user/refresh_token',
